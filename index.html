@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bowen Today</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Lunch, weather, what to wear, and news from the principal and PTO, for Bowen Elementary families in Newton. Ask Arrow and Louie! An unofficial guide.">
+<!-- The front door for Bowen Today: texts and social apps read the lines below to show a preview of the link, then
+     visitors go straight on to the page (the Google Apps Script web app), with anything after the "?" kept.
+     Opened as /?add it stays put and shows how to put Bowen Today on a phone's home screen. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bowen Today">
+<meta property="og:title" content="Bowen Today">
+<meta property="og:description" content="Lunch, weather, what to wear, and news from the principal and PTO, for Bowen Elementary families in Newton. Ask Arrow and Louie! An unofficial guide.">
+<meta property="og:url" content="https://bowen-today.github.io/">
+<meta property="og:image" content="https://bowen-today.github.io/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Arrow and Louie, the Bowen Vibe Squad, beside the words Bowen Today">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://bowen-today.github.io/preview.jpg">
+<meta name="theme-color" content="#3468B4">
+<meta name="apple-mobile-web-app-title" content="Bowen Today">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+  :root{--blue:#3468B4;--deep:#244C86;--ink:#1B2B3C;--mist:#5A6E85;--paper:#F5F7FA;--card:#fff;--rule:#C7D3E0;--tray:#E6EDF5;--green:#477D1B}
+  body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font:17px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  main{max-width:420px;margin:0 auto;padding:28px 20px 40px}
+  .wait{min-height:60vh;display:grid;place-items:center;text-align:center}
+  a{color:var(--deep);font-weight:600}
+  .app{display:flex;align-items:center;gap:14px;margin:0 0 18px}
+  .app img{width:72px;height:72px;border-radius:17px;box-shadow:0 2px 6px rgba(27,43,60,.25)}
+  .app h1{margin:0;font-size:26px;line-height:1.1;color:var(--deep)}
+  .app p{margin:4px 0 0;font-size:14px;color:var(--mist)}
+  h2{margin:22px 0 8px;font-size:17px;color:var(--deep)}
+  ol{margin:0;padding-left:22px}
+  li{margin:8px 0}
+  .ic{display:inline-block;width:20px;height:20px;vertical-align:-5px;margin:0 2px}
+  .btn{display:inline-block;margin:18px 0 0;padding:12px 20px;border-radius:999px;background:var(--green);color:#fff;font-weight:700;text-decoration:none}
+  .why{margin:22px 0 0;padding:12px 14px;border-radius:12px;background:var(--card);border:1.5px solid var(--rule);font-size:15px;color:var(--mist)}
+  .note{margin:18px 0 0;font-size:14px;color:var(--mist)}
+  [hidden]{display:none !important}
+</style>
+<script>
+  // the page itself (the Apps Script web app); the door keeps anything after the "?" (a link that carries children's profiles)
+  var APP = 'https://script.google.com/macros/s/AKfycbzjh9ORZhm62EE-wHmqwDq_pfuc1R6WEgbo37sUSYK6i9WpQpocYYFatZu4BJYXjSdGIg/exec';
+  var ADD = /(^|[?&])add(=|&|$)/.test(location.search);
+  if (!ADD) location.replace(APP + location.search);
+</script>
+</head>
+<body>
+<main id="wait" class="wait">
+  <p>Opening Bowen Today&hellip;<br><a href="https://script.google.com/macros/s/AKfycbzjh9ORZhm62EE-wHmqwDq_pfuc1R6WEgbo37sUSYK6i9WpQpocYYFatZu4BJYXjSdGIg/exec">Tap here</a> if nothing happens.</p>
+</main>
+<main id="add" hidden>
+  <div class="app"><img src="apple-touch-icon.png" alt=""><div><h1>Bowen Today</h1><p>Lunch, weather, what to wear, and news from the principal and PTO</p></div></div>
+  <p>Put it on your home screen and it opens with one tap, like an app.</p>
+  <section id="ios" hidden>
+    <h2>On an iPhone or iPad</h2>
+    <ol>
+      <li>Tap the Share button <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4" fill="none" stroke="#3468B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8" fill="none" stroke="#3468B4" stroke-width="2" stroke-linecap="round"/></svg> at the bottom of Safari (in Chrome, it is at the top right).</li>
+      <li>Scroll the list and tap <b>Add to Home Screen</b>.</li>
+      <li>Tap <b>Add</b>. Arrow&rsquo;s face appears on your home screen as <b>Bowen Today</b>.</li>
+    </ol>
+  </section>
+  <section id="android" hidden>
+    <h2>On an Android phone</h2>
+    <ol>
+      <li>Tap the three dots <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2" fill="#3468B4"/><circle cx="12" cy="12" r="2" fill="#3468B4"/><circle cx="12" cy="19" r="2" fill="#3468B4"/></svg> at the top right of Chrome.</li>
+      <li>Tap <b>Add to Home screen</b>, then <b>Add</b>.</li>
+    </ol>
+  </section>
+  <section id="desk" hidden>
+    <h2>On a computer</h2>
+    <p>Bookmark this page, or open it on your phone to add it to the home screen.</p>
+  </section>
+  <a class="btn" id="open" href="https://script.google.com/macros/s/AKfycbzjh9ORZhm62EE-wHmqwDq_pfuc1R6WEgbo37sUSYK6i9WpQpocYYFatZu4BJYXjSdGIg/exec">Open Bowen Today</a>
+  <p class="why">Apple and Google don&rsquo;t let a web page add itself to the home screen, so it takes these two taps. The icon then opens Bowen Today directly.</p>
+  <p class="note">An unofficial guide for Bowen families, not a school or PTO site.</p>
+</main>
+<script>
+  if (ADD) {
+    var keep = location.search.slice(1).split('&').filter(function (x) { return x && !/^add(=|$)/.test(x); }).join('&');   // a link with profiles keeps them
+    if (keep) document.getElementById('open').href += '?' + keep;
+    // what gets saved to the home screen is this page's address: make it the door itself, so a tap opens the page
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+    document.getElementById('wait').hidden = true;
+    document.getElementById('add').hidden = false;
+    var ua = navigator.userAgent || '', ios = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1), android = /Android/.test(ua);
+    document.getElementById(ios ? 'ios' : android ? 'android' : 'desk').hidden = false;
+  }
+</script>
+</body>
+</html>

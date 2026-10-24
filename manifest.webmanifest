@@ -1,0 +1,14 @@
+{
+  "name": "Bowen Today",
+  "short_name": "Bowen Today",
+  "description": "Lunch, weather, what to wear, and news from the principal and PTO, for Bowen Elementary families in Newton.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#F5F7FA",
+  "theme_color": "#3468B4",
+  "icons": [
+    { "src": "icon.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
