@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bowen Today: connection test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<!-- Step 1 of the move of Bowen Today onto this site (docs/first-party-plan.md in the project folder): can a page served
+     from here ask the script for its data, and does what this browser stores survive closing it? Not the page itself:
+     https://bowen-today.github.io/ opens that. -->
+<meta name="theme-color" content="#3468B4">
+<link rel="icon" type="image/png" href="../icon.png">
+<style>
+  :root{--blue:#3468B4;--deep:#244C86;--ink:#1B2B3C;--mist:#5A6E85;--paper:#F5F7FA;--card:#fff;--rule:#C7D3E0;--red:#A4123F}
+  body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  main{max-width:460px;margin:0 auto;padding:24px 18px 40px}
+  h1{margin:0 0 4px;font-size:24px;color:var(--deep)}
+  p{margin:10px 0}
+  .note{font-size:14px;color:var(--mist)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;background:var(--card);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:8px 10px;border-top:1px solid var(--rule);font-size:15px;vertical-align:top}
+  th{color:var(--mist);font-weight:600;border-top:0}
+  td.ms{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .ok{color:var(--deep);font-weight:700}
+  .bad{color:var(--red);font-weight:700}
+  button{margin:6px 0 0;padding:10px 18px;border:0;border-radius:999px;background:var(--blue);color:#fff;font:inherit;font-weight:700}
+  dl{margin:14px 0;padding:10px 14px;background:var(--card);border:1.5px solid var(--rule);border-radius:12px}
+  dt{font-size:14px;color:var(--mist)}
+  dd{margin:0 0 8px;font-weight:600}
+</style>
+</head>
+<body>
+<main>
+  <h1>Bowen Today: connection test</h1>
+  <p class="note">A test for the move of Bowen Today onto this site. Not the page itself: <a href="https://bowen-today.github.io/">bowen-today.github.io</a> opens that. Send a screenshot of this page.</p>
+  <table id="t"><tr><th>Try</th><th>Answer</th><th>ms</th></tr></table>
+  <button id="again" type="button">Run again</button>
+  <dl>
+    <dt>This browser first opened this test</dt><dd id="first">&hellip;</dd>
+    <dt>Opened, counting this time</dt><dd id="times">&hellip;</dd>
+    <dt>Opened as</dt><dd id="mode">&hellip;</dd>
+    <dt>Browser</dt><dd id="ua">&hellip;</dd>
+  </dl>
+  <p class="note">If, after closing the browser completely and opening this page again, the first line above still shows the earlier time, what this site stores on the phone survives, which is the point of the move.</p>
+</main>
+<script>
+  var APP = 'https://script.google.com/macros/s/AKfycbzjh9ORZhm62EE-wHmqwDq_pfuc1R6WEgbo37sUSYK6i9WpQpocYYFatZu4BJYXjSdGIg/exec';
+  var $ = function (id) { return document.getElementById(id); };
+  function row(label, text, cls, ms) {
+    var tr = document.createElement('tr'), a = document.createElement('td'), b = document.createElement('td'), c = document.createElement('td');
+    a.textContent = label; b.textContent = text; b.className = cls || ''; c.textContent = ms === undefined ? '' : String(ms); c.className = 'ms';
+    tr.appendChild(a); tr.appendChild(b); tr.appendChild(c); $('t').appendChild(tr);
+  }
+  function ask(label, post, done) {
+    var t0 = Date.now();
+    var opts = post ? { method: 'POST', body: JSON.stringify({ from: 'next' }) } : {};   // a plain request: no headers of its own
+    fetch(APP + '?api=ping', opts).then(function (r) { return r.json(); }).then(function (j) {
+      var ms = Date.now() - t0;
+      if (j && j.ok) row(label, 'answered: build ' + j.build + (post ? (j.post ? ', body read' : ', BODY NOT READ') : ''), 'ok', ms);
+      else row(label, 'answered, but not as expected: ' + JSON.stringify(j).slice(0, 80), 'bad', ms);
+      done();
+    }).catch(function (e) { row(label, 'FAILED: ' + (e && e.message ? e.message : e), 'bad', Date.now() - t0); done(); });
+  }
+  function run() {
+    var t = $('t'); while (t.rows.length > 1) t.deleteRow(1);
+    ask('1. first ask (cold)', false, function () { ask('2. again (warm)', false, function () { ask('3. again', false, function () { ask('4. with a body (POST)', true, function () {}); }); }); });
+  }
+  $('again').addEventListener('click', run);
+  run();
+  // storage: does this site's storage survive closing the browser? (the question the move is meant to settle)
+  var first = '', times = 0;
+  try {
+    first = window.localStorage.getItem('next.first') || '';
+    if (!first) { first = new Date().toISOString(); window.localStorage.setItem('next.first', first); }
+    times = (+window.localStorage.getItem('next.times') || 0) + 1; window.localStorage.setItem('next.times', String(times));
+  } catch (e) { first = ''; }
+  $('first').textContent = first ? new Date(first).toLocaleString() + (times === 1 ? ' (that is now: nothing was stored before)' : '') : 'storage is not available in this browser';
+  $('times').textContent = first ? times + (times === 1 ? ' time' : ' times') : '-';
+  var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+  $('mode').textContent = standalone ? 'a home-screen app of its own' : 'a browser tab';
+  $('ua').textContent = navigator.userAgent;
+</script>
+</body>
+</html>
